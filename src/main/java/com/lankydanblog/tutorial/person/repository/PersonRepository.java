@@ -24,8 +24,8 @@ public class PersonRepository {
   private static final String TABLE = "people_by_country";
 
   public PersonRepository(MappingManager mappingManager) {
-    createTable(mappingManager.getSession());
-    this.mapper = mappingManager.mapper(Person.class);
+    //createTable(mappingManager.getSession());
+   // this.mapper = mappingManager.mapper(Person.class);
     this.session = mappingManager.getSession();
   }
 
@@ -46,9 +46,10 @@ public class PersonRepository {
     return mapper.get(country, firstName, secondName, id);
   }
 
-  public List<Person> findAll() {
+  public ResultSet findAll() {
     final ResultSet result = session.execute(select().all().from(TABLE));
-    return mapper.map(result).all();
+  //  return mapper.map(result).all();
+    return result;
   }
 
   public List<Person> findAllByCountry(String country) {
